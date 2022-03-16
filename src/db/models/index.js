@@ -1,5 +1,3 @@
-
-   
 import product from "./product.js";
 import review from "./review.js";
 

@@ -7,8 +7,8 @@ const product = sequelize.define(
   {
     id: {
       primaryKey: true,
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV1,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -23,7 +23,7 @@ const product = sequelize.define(
         allowNull: false,
       },
    image: {
-      type: DataTypes,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     price: {
@@ -39,9 +39,6 @@ const product = sequelize.define(
         defaultValue: DataTypes.NOW,
       }
   },
-  {
-    timestamps: false,
-  }
 );
 
 export default product;
