@@ -6,6 +6,15 @@ const router = Router();
 
 router.get("/", async (req, res, next) => {
   try {
+      const data = await product.findAll({ include: review });
+      res.send(data);
+  } catch (error) {
+      console.log(error);
+  }
+});
+
+router.get("/search", async (req, res, next) => {
+  try {
     const data = await product.findAll({ include: review, 
       where: {
       [Op.or]: [
@@ -14,18 +23,25 @@ router.get("/", async (req, res, next) => {
             [Op.iLike]: `%${req.query.name}%`,
           },
         },
-        req.query.description && {
+     {
           description: {
             [Op.iLike]: `%${req.query.description}%`,
           },
         },
+       req.query.range && {
+          price: {
+            [Op.between]: [parseInt(req.query.range.split("-")), parseInt(req.query.range.split("-")[1])],
+          },
+        },
       ],
-    }, });
+    },
+  });
     res.send(data);
   } catch (error) {
     console.log(error);
   }
 });
+
 
 router.get("/:id", async (req, res, next) => {
   try {
