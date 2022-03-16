@@ -6,36 +6,40 @@ const router = Router();
 
 router.get("/", async (req, res, next) => {
   try {
-      const data = await product.findAll({ include: review });
-      res.send(data);
+    const data = await product.findAll({ include: review });
+    res.send(data);
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 });
 
 router.get("/search", async (req, res, next) => {
   try {
-    const data = await product.findAll({ include: review, 
+    const data = await product.findAll({
+      include: review,
       where: {
-      [Op.or]: [
-       {
-          name: {
-            [Op.iLike]: `%${req.query.name}%`,
+        [Op.or]: [
+          {
+            name: {
+              [Op.iLike]: `%${req.query.name}%`,
+            },
           },
-        },
-     {
-          description: {
-            [Op.iLike]: `%${req.query.description}%`,
+          {
+            description: {
+              [Op.iLike]: `%${req.query.description}%`,
+            },
           },
-        },
-       req.query.range && {
-          price: {
-            [Op.between]: [parseInt(req.query.range.split("-")), parseInt(req.query.range.split("-")[1])],
+          req.query.range && {
+            price: {
+              [Op.between]: [parseInt(req.query.range.split("-")), parseInt(req.query.range.split("-")[1])],
+            },
           },
-        },
+        ],
+      },
+      order: [ 
+        [req.query.order.split(",")[0], req.query.order.split(",")[1]]
       ],
-    },
-  });
+    });
     res.send(data);
   } catch (error) {
     console.log(error);
