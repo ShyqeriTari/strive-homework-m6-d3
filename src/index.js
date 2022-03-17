@@ -4,6 +4,8 @@ import cors from "cors";
 import { testDB, syncDB } from "./db/index.js";
 import reviewRoute from "./services/review/index.js";
 import productRoute from "./services/product/index.js";
+import categoryRoute from "./services/category/index.js";
+import userRoute from "./services/user/index.js";
 
 const server = express();
 
@@ -13,6 +15,8 @@ server.use(cors());
 
 server.use("/review", reviewRoute);
 server.use("/product", productRoute);
+server.use("/category", categoryRoute);
+server.use("/user", userRoute);
 
 const { PORT } = process.env;
 

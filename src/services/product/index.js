@@ -1,12 +1,15 @@
 import { Router } from "express";
-import { product, review } from "../../db/models/index.js";
+import { product, review, category, productCategory, user } from "../../db/models/index.js";
 import { Op } from "sequelize";
 
 const router = Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const data = await product.findAll({ include: review });
+    const data = await product.findAll({ include: [
+      { model: category },
+      { model: review, include: user },
+    ], });
     res.send(data);
   } catch (error) {
     console.log(error);
@@ -58,8 +61,16 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const newProduct = await product.create(req.body);
-    res.send(newProduct);
+    const { categoryId, ...rest } = req.body;
+
+    const newProduct = await product.create(rest);
+
+    const productsCategory = await productCategory.create({
+      productId: newProduct.id,
+      categoryId: categoryId,
+    });
+
+    res.send({ newProduct, productCategory });
   } catch (error) {
     console.log(error);
   }

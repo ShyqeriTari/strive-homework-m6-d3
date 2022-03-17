@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { review, product } from "../../db/models/index.js";
+import { review, product, user } from "../../db/models/index.js";
 
 
 const router = Router();
 
 router.get("/", async (req, res, next) => {
     try {
-        const data = await review.findAll({ include: product });
+        const data = await review.findAll({ include: product, user });
         res.send(data);
     } catch (error) {
         console.log(error);
