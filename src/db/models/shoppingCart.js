@@ -2,7 +2,7 @@
 import sequelize from "../index.js";
 import { DataTypes } from "sequelize";
 
-const product = sequelize.define(
+const shoppingCart = sequelize.define(
   "shoppingCart",
   {
     id: {
