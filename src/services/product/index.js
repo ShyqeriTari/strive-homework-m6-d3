@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
     offset:parseInt(req.query.limit.split(",")),
      limit: parseInt(req.query.limit.split(",")[1]),
      order: [ 
-      [id, ASC]
+      [data.rows.id, ASC]
     ]
     });
     res.send(data.rows);
