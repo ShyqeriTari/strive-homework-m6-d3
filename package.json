@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": "v16.13.0" 
+  },
+
   "scripts": {
     "prestart": "npm run create-tables",
     "create-tables": "node -r dotenv/config ./create-tables.js",
