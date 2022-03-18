@@ -70,19 +70,19 @@ router.post("/", async (req, res, next) => {
     const { categoryId, ...rest } = req.body;
 
     const newProduct = await product.create(rest);
-
+    const catArr = []
     for(let i=0; i< categoryId.length; i++){
-const catArr = []
 
     const productsCategory = {
       productId: newProduct.id,
-      categoryId: categoryId,
+      categoryId: categoryId[i],
     };
     catArr.push(productsCategory)
-
-    const prodCat = await productCategory.bulkCreate(catArr)
+   
   }
-    res.send({ newProduct, productCategory });
+  console.log(catArr)
+  const prodCat = await productCategory.bulkCreate(catArr)
+    res.send([newProduct, productCategory ]);
   } catch (error) {
     console.log(error);
   }
