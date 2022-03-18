@@ -27,9 +27,6 @@ const shoppingCart = sequelize.define(
       defaultValue: DataTypes.NOW,
     },
   },
-  {
-    timestamps: false,
-  }
 );
 
 export default shoppingCart;
