@@ -18,6 +18,10 @@ const shoppingCart = sequelize.define(
       type: DataTypes.FLOAT,
       allowNull: false,
     },
+    image:{
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
     quantity:{
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -26,6 +30,9 @@ const shoppingCart = sequelize.define(
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
+  },
+  {
+    timestamps: false,
   }
 );
 
