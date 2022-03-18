@@ -22,12 +22,12 @@ router.get("/search", async (req, res, next) => {
       include: review,
       where: {
         [Op.or]: [
-          {
+          req.query.name && {
             name: {
               [Op.iLike]: `%${req.query.name}%`,
             },
           },
-          {
+          req.query.description && {
             description: {
               [Op.iLike]: `%${req.query.description}%`,
             },
@@ -39,13 +39,14 @@ router.get("/search", async (req, res, next) => {
           },
         ],
       },
-      order: [ 
+    order: [   req.query.order && 
         [req.query.order.split(",")[0], req.query.order.split(",")[1]]
       ],
     });
     res.send(data);
   } catch (error) {
     console.log(error);
+    next(error)
   }
 });
 
