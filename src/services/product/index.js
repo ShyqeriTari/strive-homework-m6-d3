@@ -6,13 +6,14 @@ const router = Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const data = await product.findAll({ 
-      limit: [2],
-      offset:[2],
+    const data = await product.findAndCountAll({ 
       include: [
       { model: category },
       { model: review, include: user },
-    ], });
+    ], 
+    offset:2,
+     limit: 2,
+    });
     res.send(data);
   } catch (error) {
     console.log(error);
