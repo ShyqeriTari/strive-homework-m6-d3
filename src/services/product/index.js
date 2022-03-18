@@ -11,10 +11,10 @@ router.get("/", async (req, res, next) => {
       { model: category },
       { model: review, include: user },
     ], 
-    offset:2,
-     limit: 2,
+    offset:parseInt(req.query.limit.split(",")),
+     limit: parseInt(req.query.limit.split(",")[1]),
     });
-    res.send(data);
+    res.send(data.rows);
   } catch (error) {
     console.log(error);
   }
