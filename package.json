@@ -9,8 +9,8 @@
   },
 
   "scripts": {
-    "prestart": "npm run create-tables",
-    "create-tables": "node  ./create-tables.js",
+    // "prestart": "npm run create-tables",
+    // "create-tables": "node  ./create-tables.js",
     "start": "node ./src/index.js",
     "dev": "nodemon -r dotenv/config ./src/index.js"
   },
