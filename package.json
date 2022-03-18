@@ -11,7 +11,7 @@
   "scripts": {
     "prestart": "npm run create-tables",
     "create-tables": "node -r dotenv/config ./create-tables.js",
-    "start": "node -r dotenv/config ./src/index.js",
+    "start": "node ./src/index.js",
     "dev": "nodemon -r dotenv/config ./src/index.js"
   },
   "repository": {
