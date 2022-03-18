@@ -32,6 +32,11 @@ router.get("/search", async (req, res, next) => {
               [Op.iLike]: `%${req.query.description}%`,
             },
           },
+          req.query.category && {
+            category: {
+              [Op.iLike]: `%${req.query.category}%`,
+            },
+          },
           req.query.range && {
             price: {
               [Op.between]: [parseInt(req.query.range.split("-")), parseInt(req.query.range.split("-")[1])],
