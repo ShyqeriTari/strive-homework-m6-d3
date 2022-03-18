@@ -80,9 +80,8 @@ router.post("/", async (req, res, next) => {
     catArr.push(productsCategory)
    
   }
-  console.log(catArr)
   const prodCat = await productCategory.bulkCreate(catArr)
-    res.send([newProduct, productCategory ]);
+    res.send(newProduct);
   } catch (error) {
     console.log(error);
   }
